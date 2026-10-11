@@ -1,0 +1,16 @@
+---
+- name: Update apt package cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Install common tools
+  ansible.builtin.apt:
+    name:
+      - curl
+      - git
+      - vim
+      - htop
+      - tree
+      - unzip
+    state: present
