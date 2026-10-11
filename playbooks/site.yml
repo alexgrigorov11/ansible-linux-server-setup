@@ -3,19 +3,5 @@
   hosts: local
   become: true
 
-  tasks:
-    - name: Update apt package cache
-      apt:
-        update_cache: true
-        cache_valid_time: 3600
-
-    - name: Install common tools
-      apt:
-        name:
-          - curl
-          - git
-          - vim
-          - htop
-          - tree
-          - unzip
-        state: present
+  roles:
+    - common
