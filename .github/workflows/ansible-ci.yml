@@ -29,8 +29,7 @@ jobs:
 
       - name: Install Ansible collections
         run: |
-          ansible-galaxy collection install community.general
-          ansible-galaxy collection install ansible.posix
+          ansible-galaxy collection install -r requriments.yml
 
       - name: Check playbook syntax
         run: |
