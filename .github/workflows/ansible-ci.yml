@@ -43,4 +43,4 @@ jobs:
           ansible-playbook playbooks/site.yml --list-tasks
 
       - name: Run Ansible lint
-        run: ansible-lint playbooks/site.yml
+        run: ansible-lint roles/*/tasks/main.yml playbooks/site.yml
