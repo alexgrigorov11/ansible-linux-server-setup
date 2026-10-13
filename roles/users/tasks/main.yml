@@ -1,0 +1,10 @@
+---
+- name: Create administrative user
+  ansible.builtin.user:
+    name: "{{ admin_user }}"
+    groups:
+      - sudo
+    append: true
+    shell: /bin/bash
+    create_home: true
+    state: present
