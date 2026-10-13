@@ -4,12 +4,12 @@
     name: ufw
     state: present
 
-- name: Set default incoming policy
+- name: Set default incoming policy  # noqa args[module]
   community.general.ufw:
     direction: incoming
     policy: "{{ firewall_default_incoming }}"
 
-- name: Set default outgoing policy
+- name: Set default outgoing policy  # noqa args[module]
   community.general.ufw:
     direction: outgoing
     policy: "{{ firewall_default_outgoing }}"
