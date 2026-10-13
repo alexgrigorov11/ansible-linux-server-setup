@@ -1,0 +1,24 @@
+---
+- name: Install OpenSSH Server
+  ansible.builtin.apt:
+    name: openssh-server
+    state: present
+
+- name: Create SSH hardening configuration
+  ansible.builtin.copy:
+    dest: /etc/ssh/sshd_config.d/99-ansible-hardening.conf
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      PermitRootLogin {{ ssh_permit_root_login }}
+      PubkeyAuthentication {{ ssh_pubkey_authentication }}
+      PasswordAuthentication {{ ssh_password_authentication }}
+      MaxAuthTries {{ ssh_max_auth_tries }}
+      X11Forwarding {{ ssh_x11_forwarding }}
+  notify: Restart SSH
+
+- name: Validate SSH configuration
+  ansible.builtin.command:
+    cmd: sshd -t
+  changed_when: false
