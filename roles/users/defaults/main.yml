@@ -1,2 +1,5 @@
 ---
 admin_user: serveradmin
+
+controller_user: "{{ lookup('env', 'SUDO_USER') | default(lookup('env', 'USER'), true) }}"
+ssh_public_key_path: "/home/{{ controller_user }}/.ssh/id_ed25519.pub"
