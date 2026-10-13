@@ -8,3 +8,9 @@
     shell: /bin/bash
     create_home: true
     state: present
+
+- name: Add SSH public key for administrative user
+  ansible.posix.authorized_key:
+    user: "{{ admin_user }}"
+    state: present
+    key: "{{ lookup('file', ssh_public_key_path) }}"

@@ -1,6 +1,7 @@
 ---
 ssh_permit_root_login: "no"
 ssh_pubkey_authentication: "yes"
-ssh_password_authentication: "yes"
+ssh_password_authentication: "no"
+ssh_kbd_interactive_authentication: "no"
 ssh_max_auth_tries: 3
 ssh_x11_forwarding: "no"
