@@ -27,6 +27,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install ansible-core
 
+      - name: Install Ansible lint
+        run: pip install ansible-lint
+
       - name: Install Ansible collections
         run: |
           ansible-galaxy collection install -r requirements.yml
@@ -38,3 +41,6 @@ jobs:
       - name: List playbook tasks
         run: |
           ansible-playbook playbooks/site.yml --list-tasks
+
+      - name: Run Ansible lint
+        run: ansible-lint roles/*/tasks/main.yml

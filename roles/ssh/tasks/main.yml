@@ -23,4 +23,3 @@
   ansible.builtin.command:
     cmd: sshd -t
   changed_when: false
-
