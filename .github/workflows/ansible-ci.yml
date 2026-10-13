@@ -17,17 +17,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Debug repository contents
-        run: |
-          echo "Current directory:"
-          pwd
-          echo "Current commit:"
-          git rev-parse HEAD
-          echo "Repository files:"
-          ls -la
-          echo "Requirements search:"
-          find . -maxdepth 2 -name "requirements.yml" -print
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
