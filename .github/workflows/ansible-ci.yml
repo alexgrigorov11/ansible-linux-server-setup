@@ -1,0 +1,41 @@
+---
+name: Ansible CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install Ansible
+        run: |
+          python -m pip install --upgrade pip
+          pip install ansible-core
+
+      - name: Install Ansible collections
+        run: |
+          ansible-galaxy collection install community.general
+          ansible-galaxy collection install ansible.posix
+
+      - name: Check playbook syntax
+        run: |
+          ansible-playbook playbooks/site.yml --syntax-check
+
+      - name: List playbook tasks
+        run: |
+          ansible-playbook playbooks/site.yml --list-tasks
