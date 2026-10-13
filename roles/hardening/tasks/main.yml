@@ -1,0 +1,39 @@
+---
+- name: Install security hardening packages
+  ansible.builtin.apt:
+    name:
+      - fail2ban
+      - unattended-upgrades
+    state: present
+
+- name: Configure Fail2ban SSH jail
+  ansible.builtin.copy:
+    dest: /etc/fail2ban/jail.d/sshd.local
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      [sshd]
+      enabled = true
+      port = ssh
+      backend = systemd
+      maxretry = {{ fail2ban_maxretry }}
+      findtime = {{ fail2ban_findtime }}
+      bantime = {{ fail2ban_bantime }}
+  notify: Restart Fail2ban
+
+- name: Enable automatic security updates
+  ansible.builtin.copy:
+    dest: /etc/apt/apt.conf.d/20auto-upgrades
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      APT::Periodic::Update-Package-Lists "1";
+      APT::Periodic::Unattended-Upgrade "1";
+
+- name: Ensure Fail2ban is enabled and running
+  ansible.builtin.service:
+    name: fail2ban
+    enabled: true
+    state: started
