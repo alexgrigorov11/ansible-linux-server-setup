@@ -15,16 +15,15 @@ Build an Ansible project that automates basic Linux server setup.
 - Apt package cache update
 - Common tool installation
 - Idempotent execution
+- Reusable roles for users, firewall, SSH, and hardening
+- GitHub Actions syntax and lint validation
 
 ## Next improvements
 
-- Add Ansible roles
-- Create a non-root user
-- Configure firewall
-- Add security hardening
-- Add GitHub Actions
 - Test on a real Linux VM
-- Create v1.0 release
+- Add Molecule or integration tests
+- Pin collection versions for reproducible builds
+- Add remote inventory and safe SSH-key variables
 
 ## Definition of done
 
